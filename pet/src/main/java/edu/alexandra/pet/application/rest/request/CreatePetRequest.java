@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class CreatePetRequest {
+public final class CreatePetRequest {
 
     private String userId;
     private String name;
