@@ -17,10 +17,10 @@ public class PetServiceImpl implements PetService {
                 .id(UUID.randomUUID().toString())
                 .name(createPetRequest.getName())
                 .type(createPetRequest.getType())
-                .userId(createPetRequest.getUserId())
                 .build();
 
         // Add pet to User Pets collection
+
 
         // Return pet
         return pet;
