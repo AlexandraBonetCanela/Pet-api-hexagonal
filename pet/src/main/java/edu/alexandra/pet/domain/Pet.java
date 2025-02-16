@@ -1,10 +1,12 @@
 package edu.alexandra.pet.domain;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
 @ToString
+@SuperBuilder
 @EqualsAndHashCode
 @AllArgsConstructor
 public class Pet {
