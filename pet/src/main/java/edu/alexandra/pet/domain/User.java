@@ -16,11 +16,4 @@ public class User {
     private String password;
     private List<Pet> pets;
 
-    public void addPet(Pet pet) {
-        pets.add(pet);
-    }
-
-    public void removePet(Pet pet) {
-        pets.remove(pet);
-    }
 }

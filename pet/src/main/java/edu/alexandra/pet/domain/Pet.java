@@ -29,8 +29,6 @@ public class Pet {
     @Builder.Default
     private int foodLevel = 5;
 
-    private User owner;
-
     @Builder.Default
     private LocalDateTime lastUpdated = LocalDateTime.now();
 
