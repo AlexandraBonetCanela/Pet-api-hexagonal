@@ -7,5 +7,5 @@ public interface UserRepository {
 
     User findById(String id);
 
-    User addPet(User user, Pet pet);
+    Pet addPet(String userId, Pet pet);
 }

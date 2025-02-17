@@ -8,7 +8,7 @@ public interface UserService {
 
     RegistrationResponse register(RegistrationRequest request);
 
-    void addPet(String userId, Pet pet);
+    Pet addPet(String userId, Pet pet);
 
 //    void login();
 

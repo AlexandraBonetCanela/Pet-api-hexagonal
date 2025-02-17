@@ -26,7 +26,7 @@ public class PetEntity {
     private String type;
 
     @Column(name = "happinessLevel", nullable = false)
-    private int hapinessLevel;
+    private int happinessLevel;
 
     @Column(name = "foodLevel", nullable = false)
     private int foodLevel;

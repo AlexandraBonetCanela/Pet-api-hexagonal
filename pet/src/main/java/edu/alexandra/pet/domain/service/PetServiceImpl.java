@@ -30,4 +30,9 @@ public class PetServiceImpl implements PetService {
         // Return pet
         return pet;
     }
+
+    @Override
+    public void deletePet(String petId) {
+
+    }
 }

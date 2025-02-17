@@ -7,9 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -23,7 +21,7 @@ public class PetRESTController {
     private final PetService petService;
 
     @PostMapping
-    public ResponseEntity<Pet> createPet(CreatePetRequest createPetRequest) {
+    public ResponseEntity<Pet> createPet(@RequestBody  CreatePetRequest createPetRequest) {
 
         log.info("Creating pet with name: {} for user {}", createPetRequest.getName(), createPetRequest.getUserId());
 
@@ -35,5 +33,15 @@ public class PetRESTController {
                 .toUri();
 
         return ResponseEntity.created(uri).body(pet);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> deletePet(@PathVariable String petId) {
+
+        log.info("Deleting pet with id: {}", petId);
+
+        petService.deletePet(petId);
+
+        return ResponseEntity.noContent().build();
     }
 }

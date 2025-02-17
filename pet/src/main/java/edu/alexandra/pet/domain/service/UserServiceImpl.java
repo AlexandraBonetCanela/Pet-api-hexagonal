@@ -21,10 +21,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void addPet(String userId, Pet pet) {
+    public Pet addPet(String userId, Pet pet) {
 
-        User user = userRepository.findById(userId);
-
-        userRepository.addPet(user, pet);
+        return userRepository.addPet(userId, pet);
     }
 }
