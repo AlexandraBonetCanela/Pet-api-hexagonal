@@ -35,7 +35,7 @@ public class PetRESTController {
         return ResponseEntity.created(uri).body(pet);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{petId}")
     public ResponseEntity<Void> deletePet(@PathVariable String petId) {
 
         log.info("Deleting pet with id: {}", petId);

@@ -2,6 +2,7 @@ package edu.alexandra.pet.domain.service;
 
 import edu.alexandra.pet.application.rest.request.CreatePetRequest;
 import edu.alexandra.pet.domain.Pet;
+import edu.alexandra.pet.domain.repository.PetRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import java.util.UUID;
 public class PetServiceImpl implements PetService {
 
     private final UserService userService;
+    private final PetRepository petRepository;
 
     @Override
     public Pet createPet(CreatePetRequest createPetRequest) {
@@ -33,6 +35,6 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public void deletePet(String petId) {
-
+        petRepository.deletePet(petId);
     }
 }
