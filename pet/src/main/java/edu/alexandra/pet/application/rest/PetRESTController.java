@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -33,6 +34,16 @@ public class PetRESTController {
                 .toUri();
 
         return ResponseEntity.created(uri).body(pet);
+    }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<List<Pet>> getPets(@PathVariable String userId) {
+
+        log.info("Getting pets for user with id: {}", userId);
+
+        List<Pet> pets = petService.getPets(userId);
+
+        return ResponseEntity.ok().body(pets);
     }
 
     @DeleteMapping("/{petId}")

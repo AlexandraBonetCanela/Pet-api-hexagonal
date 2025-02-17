@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -36,5 +37,10 @@ public class PetServiceImpl implements PetService {
     @Override
     public void deletePet(String petId) {
         petRepository.deletePet(petId);
+    }
+
+    @Override
+    public List<Pet> getPets(String userId) {
+        return petRepository.getPets(userId);
     }
 }
