@@ -1,10 +1,12 @@
 package edu.alexandra.pet.application.rest;
 
 import edu.alexandra.pet.application.rest.request.CreatePetRequest;
+import edu.alexandra.pet.application.rest.request.UpdatePetRequest;
 import edu.alexandra.pet.domain.Pet;
 import edu.alexandra.pet.domain.service.PetService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,6 +46,16 @@ public class PetRESTController {
         List<Pet> pets = petService.getPets(userId);
 
         return ResponseEntity.ok().body(pets);
+    }
+
+    @PostMapping("/{petId}")
+    public ResponseEntity<Pet> updatePet(@PathVariable String petId, @RequestBody UpdatePetRequest updatePetRequest) {
+
+        log.info("Updating pet with id: {}", petId);
+
+        Pet pet = petService.updatePet(petId, updatePetRequest);
+
+        return ResponseEntity.ok().body(pet);
     }
 
     @DeleteMapping("/{petId}")
