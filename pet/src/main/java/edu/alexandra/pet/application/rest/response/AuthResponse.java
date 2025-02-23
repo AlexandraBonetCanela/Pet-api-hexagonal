@@ -1,14 +1,16 @@
 package edu.alexandra.pet.application.rest.response;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
-public final class RegistrationResponse {
+public final class AuthResponse {
 
-    private final String message;
+    private final String token;
 
 }

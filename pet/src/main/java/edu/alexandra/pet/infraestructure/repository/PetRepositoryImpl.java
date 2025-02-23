@@ -23,42 +23,26 @@ public class PetRepositoryImpl implements PetRepository {
     public List<Pet> getPets(String userId) {
         return petMySQLRepository.findByUserId(userId)
                 .stream()
-                .map(this::toDomain)
+                .map(PetMapper::toDomain)
                 .toList();
     }
 
     @Override
     public Pet getPet(String petId) {
         return petMySQLRepository.findById(petId)
-                .map(this::toDomain)
+                .map(PetMapper::toDomain)
                 .orElseThrow(() -> new RuntimeException("Pet not found"));
     }
 
     @Override
-    public Pet savePet(Pet pet) {
-        return toDomain(petMySQLRepository.save(toEntity(pet)));
+    public Pet createPet(Pet pet, String userId) {
+        return PetMapper.toDomain(petMySQLRepository.save(PetMapper.toEntity(pet, userId)));
     }
 
-    private PetEntity toEntity(Pet pet) {
-        return PetEntity.builder()
-                .id(pet.getId())
-                .name(pet.getName())
-                .type(pet.getType())
-                .foodLevel(pet.getFoodLevel())
-                .happinessLevel(pet.getHappinessLevel())
-                .userId(petMySQLRepository.findById(pet.getId()).orElseThrow(() -> new RuntimeException("User not found")).getUserId())
-                .lastUpdated(pet.getLastUpdated())
-                .build();
-    }
-
-    private Pet toDomain(PetEntity entity) {
-        return new Pet(
-                entity.getId(),
-                entity.getName(),
-                entity.getType(),
-                entity.getHappinessLevel(),
-                entity.getFoodLevel(),
-                entity.getLastUpdated()
-        );
+    @Override
+    public Pet updatePet(Pet pet) {
+        PetEntity entity = petMySQLRepository.findById(pet.getId())
+                .orElseThrow(() -> new RuntimeException("Pet not found"));
+        return PetMapper.toDomain(petMySQLRepository.save(PetMapper.toEntity(pet, entity.getUserId())));
     }
 }

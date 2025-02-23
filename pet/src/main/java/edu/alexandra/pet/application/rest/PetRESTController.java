@@ -6,11 +6,11 @@ import edu.alexandra.pet.domain.Pet;
 import edu.alexandra.pet.domain.service.PetService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.net.URI;
 import java.util.List;
@@ -23,6 +23,7 @@ public class PetRESTController {
 
     private final PetService petService;
 
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
     @PostMapping
     public ResponseEntity<Pet> createPet(@RequestBody  CreatePetRequest createPetRequest) {
 
@@ -38,6 +39,7 @@ public class PetRESTController {
         return ResponseEntity.created(uri).body(pet);
     }
 
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
     @GetMapping("/{userId}")
     public ResponseEntity<List<Pet>> getPets(@PathVariable String userId) {
 
@@ -48,6 +50,7 @@ public class PetRESTController {
         return ResponseEntity.ok().body(pets);
     }
 
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
     @PostMapping("/{petId}")
     public ResponseEntity<Pet> updatePet(@PathVariable String petId, @RequestBody UpdatePetRequest updatePetRequest) {
 
@@ -58,6 +61,7 @@ public class PetRESTController {
         return ResponseEntity.ok().body(pet);
     }
 
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
     @DeleteMapping("/{petId}")
     public ResponseEntity<Void> deletePet(@PathVariable String petId) {
 

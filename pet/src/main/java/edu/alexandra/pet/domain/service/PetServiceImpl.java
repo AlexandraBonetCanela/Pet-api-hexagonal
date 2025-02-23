@@ -3,7 +3,6 @@ package edu.alexandra.pet.domain.service;
 import edu.alexandra.pet.application.rest.request.CreatePetRequest;
 import edu.alexandra.pet.application.rest.request.UpdatePetRequest;
 import edu.alexandra.pet.domain.Pet;
-import edu.alexandra.pet.domain.PetActivity;
 import edu.alexandra.pet.domain.repository.PetRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import java.util.UUID;
 @Service
 public class PetServiceImpl implements PetService {
 
-    private final UserService userService;
     private final PetRepository petRepository;
 
     @Override
@@ -30,7 +28,7 @@ public class PetServiceImpl implements PetService {
                 .build();
 
         // Add pet to User Pets collection
-        userService.addPet(createPetRequest.getUserId(), pet);
+        petRepository.createPet(pet, createPetRequest.getUserId());
 
         // Return pet
         return pet;
@@ -66,6 +64,6 @@ public class PetServiceImpl implements PetService {
         }
 
         // Save and return pet
-        return petRepository.savePet(pet);
+        return petRepository.updatePet(pet);
     }
 }

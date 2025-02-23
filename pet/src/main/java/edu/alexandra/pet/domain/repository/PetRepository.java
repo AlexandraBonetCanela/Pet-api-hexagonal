@@ -12,5 +12,7 @@ public interface PetRepository  {
 
     Pet getPet(String petId);
 
-    Pet savePet(Pet pet);
+    Pet createPet(Pet pet, String userId);
+
+    Pet updatePet(Pet pet);
 }

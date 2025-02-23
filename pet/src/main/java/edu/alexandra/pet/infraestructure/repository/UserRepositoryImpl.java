@@ -1,6 +1,5 @@
 package edu.alexandra.pet.infraestructure.repository;
 
-import edu.alexandra.pet.domain.Pet;
 import edu.alexandra.pet.domain.User;
 import edu.alexandra.pet.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,37 +15,18 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User findById(String id) {
         return userMySQLRepository.findById(id)
-                .map(this::toDomain)
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
     @Override
-    public Pet addPet(String userId, Pet pet) throws RuntimeException {
-        return userMySQLRepository.findById(userId)
-                .map(userEntity -> {
-                    userEntity.getPets().add(
-                            PetEntity.builder()
-                                    .id(pet.getId())
-                                    .name(pet.getName())
-                                    .type(pet.getType())
-                                    .foodLevel(pet.getFoodLevel())
-                                    .happinessLevel(pet.getHappinessLevel())
-                                    .userId(userId)
-                                    .lastUpdated(pet.getLastUpdated())
-                                    .build()
-                    );
-                    return userMySQLRepository.save(userEntity);
-                })
-                .map(savedUserEntity -> pet)
+    public User save(User user) {
+        return userMySQLRepository.save(user);
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return userMySQLRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
-    private User toDomain(UserEntity userEntity) {
-        return new User(
-                userEntity.getId(),
-                userEntity.getUsername(),
-                userEntity.getPassword(),
-                null // Pets are handled separately
-        );
-    }
 }
