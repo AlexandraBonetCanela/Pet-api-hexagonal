@@ -9,6 +9,6 @@ import lombok.Getter;
 @AllArgsConstructor
 public final class UpdatePetRequest {
 
-    @NotBlank
-    private PetActivity activity;
+    @NotBlank(message = "Activity is required")
+    private final PetActivity activity;
 }
