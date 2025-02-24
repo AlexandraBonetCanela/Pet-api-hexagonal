@@ -1,5 +1,6 @@
 package edu.alexandra.pet.infraestructure.security;
 
+import edu.alexandra.pet.domain.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -19,7 +20,12 @@ public class JwtService {
     private static final String SECRET_KEY="586E3272357538782F413F4428472B4B6250655368566B597033733676397924";
 
     public String getToken(UserDetails user) {
-        return getToken(new HashMap<>(), user);
+        User user2 = (User) user;
+        HashMap<String, Object> claims = new HashMap<>();
+        claims.put("userId", user2.getId()); // ✅ Include userId
+        claims.put("role", user2.getRole()); // ✅ Include role
+
+        return getToken(claims, user);
     }
 
     public String getToken(HashMap<String, Object> claims, UserDetails user) {
