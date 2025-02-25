@@ -35,9 +35,9 @@ public class AuthServiceImpl implements AuthService {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
         UserDetails user = userRepository.findByUsername(loginRequest.getUsername());
         String token = jwtService.getToken(user);
-        return AuthResponse.builder()
-                .token(token)
-                .build();
+
+        return new AuthResponse(token);
+
     }
 
     @Override
@@ -51,9 +51,9 @@ public class AuthServiceImpl implements AuthService {
                 new ArrayList<>());
 
         userRepository.save(user);
+        String token = jwtService.getToken(user);
+        
+        return new AuthResponse(token);
 
-        return AuthResponse.builder()
-                .token(jwtService.getToken(user))
-                .build();
     }
 }
