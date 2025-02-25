@@ -3,34 +3,42 @@ package edu.alexandra.pet.domain;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Slf4j
 @Getter
-@Setter
 @ToString
-@SuperBuilder
 @EqualsAndHashCode
 @AllArgsConstructor
 public class Pet {
 
-    private String id;
-    private String name;
-    private String type;
+    public Pet(String name, String type) {
+
+        this.id = UUID.randomUUID().toString();
+        this.name = name;
+        this.type = type;
+        this.happinessLevel = 3;
+        this.foodLevel = 3;
+        this.lastUpdated = LocalDateTime.now();
+    }
+
+    private final String id;
+    private final String name;
+    private final String type;
 
     @Min(0) @Max(5)
-    @Builder.Default
-    private int happinessLevel = 5;
+    @Setter
+    private int happinessLevel;
 
     @Min(0) @Max(5)
-    @Builder.Default
-    private int foodLevel = 5;
+    @Setter
+    private int foodLevel;
 
-    @Builder.Default
-    private LocalDateTime lastUpdated = LocalDateTime.now();
+    @Setter
+    private LocalDateTime lastUpdated;
 
     public void feed() {
         this.foodLevel = Math.min(5, this.foodLevel + 1);

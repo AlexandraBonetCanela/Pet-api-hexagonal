@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Service
@@ -20,17 +19,9 @@ public class PetServiceImpl implements PetService {
     @Override
     public Pet createPet(CreatePetRequest createPetRequest) {
 
-        // Create pet
-        Pet pet = Pet.builder()
-                .id(UUID.randomUUID().toString())
-                .name(createPetRequest.getName())
-                .type(createPetRequest.getType())
-                .build();
-
-        // Add pet to User Pets collection
+        Pet pet = new Pet(createPetRequest.getName(), createPetRequest.getType());
         petRepository.createPet(pet, createPetRequest.getUserId());
 
-        // Return pet
         return pet;
     }
 
@@ -47,10 +38,8 @@ public class PetServiceImpl implements PetService {
     @Override
     public Pet updatePet(String petId, UpdatePetRequest updatePetRequest) {
 
-        // Get pet
         Pet pet = petRepository.getPet(petId);
 
-        // Update pet
         switch (updatePetRequest.getActivity()) {
             case EAT:
                 pet.feed();
@@ -63,7 +52,6 @@ public class PetServiceImpl implements PetService {
                 break;
         }
 
-        // Save and return pet
         return petRepository.updatePet(pet);
     }
 }
