@@ -52,7 +52,7 @@ public class AuthServiceImpl implements AuthService {
 
         userRepository.save(user);
         String token = jwtService.getToken(user);
-        
+
         return new AuthResponse(token);
 
     }
