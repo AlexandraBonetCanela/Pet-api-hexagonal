@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.UUID;
 
 @Getter
-@Setter
 @ToString
 @Builder
 @EqualsAndHashCode
@@ -20,6 +19,13 @@ import java.util.UUID;
 @AllArgsConstructor
 @Entity
 public class User implements UserDetails {
+
+    public User(String username, String password) {
+        this.id = UUID.randomUUID().toString();
+        this.username = username;
+        this.password = password;
+        this.role = Role.USER;
+    }
 
     @Id
     private String id;

@@ -3,7 +3,6 @@ package edu.alexandra.pet.domain.service;
 import edu.alexandra.pet.application.rest.request.LoginRequest;
 import edu.alexandra.pet.application.rest.request.RegisterRequest;
 import edu.alexandra.pet.application.rest.response.AuthResponse;
-import edu.alexandra.pet.domain.Role;
 import edu.alexandra.pet.domain.User;
 import edu.alexandra.pet.domain.repository.UserRepository;
 import edu.alexandra.pet.infraestructure.security.JwtService;
@@ -16,8 +15,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.UUID;
 
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -44,11 +41,8 @@ public class AuthServiceImpl implements AuthService {
     public AuthResponse register(RegisterRequest registerRequest) {
 
         User user = new User(
-                UUID.randomUUID().toString(),
-                registerRequest.getUsername(),
-                passwordEncoder.encode(registerRequest.getPassword()),
-                Role.USER,
-                new ArrayList<>());
+                        registerRequest.getUsername(),
+                        passwordEncoder.encode(registerRequest.getPassword()));
 
         userRepository.save(user);
         String token = jwtService.getToken(user);
