@@ -41,7 +41,7 @@ public class PetServiceImpl implements PetService {
         Pet pet = petRepository.getPet(petId);
 
         switch (updatePetRequest.getActivity()) {
-            case EAT:
+            case FEED:
                 pet.feed();
                 break;
             case PLAY:
