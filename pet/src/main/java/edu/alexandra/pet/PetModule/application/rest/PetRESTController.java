@@ -51,7 +51,7 @@ public class PetRESTController {
     }
 
     @PreAuthorize("hasAnyRole('USER','ADMIN')")
-    @PostMapping("/{petId}")
+    @PutMapping("/{petId}")
     public ResponseEntity<Pet> updatePet(@PathVariable String petId, @RequestBody UpdatePetRequest updatePetRequest) {
 
         log.info("Updating pet with id: {}", petId);
