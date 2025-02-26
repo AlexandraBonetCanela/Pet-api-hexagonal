@@ -12,7 +12,6 @@ import java.util.UUID;
 @Getter
 @ToString
 @EqualsAndHashCode
-@AllArgsConstructor
 public class Pet {
 
     public Pet(String name, String type) {
@@ -23,6 +22,17 @@ public class Pet {
         this.happinessLevel = 3;
         this.foodLevel = 3;
         this.lastUpdated = LocalDateTime.now();
+    }
+
+    public Pet(String id, String name, String type, int happinessLevel, int foodLevel, LocalDateTime lastUpdated) {
+
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.happinessLevel = happinessLevel;
+        this.foodLevel = foodLevel;
+        this.lastUpdated = lastUpdated;
+        updateStats();
     }
 
     private final String id;
