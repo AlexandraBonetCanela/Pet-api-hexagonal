@@ -31,6 +31,9 @@ public class PetEntity {
     @Column(name = "foodLevel", nullable = false)
     private int foodLevel;
 
+    @Column(name = "state", nullable = false)
+    private String state;
+
     @Column(name = "lastUpdated", nullable = false)
     private LocalDateTime lastUpdated;
 

@@ -1,6 +1,7 @@
 package edu.alexandra.pet.PetModule.infrastructure.repository;
 
 import edu.alexandra.pet.PetModule.domain.model.Pet;
+import edu.alexandra.pet.PetModule.domain.model.PetState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ public class PetMapper {
                 pet.getType(),
                 pet.getHappinessLevel(),
                 pet.getFoodLevel(),
+                pet.getState().toString(),
                 pet.getLastUpdated(),
                 userId
         );
@@ -28,6 +30,7 @@ public class PetMapper {
                 entity.getType(),
                 entity.getHappinessLevel(),
                 entity.getFoodLevel(),
+                PetState.valueOf(entity.getState()),
                 entity.getLastUpdated()
         );
     }

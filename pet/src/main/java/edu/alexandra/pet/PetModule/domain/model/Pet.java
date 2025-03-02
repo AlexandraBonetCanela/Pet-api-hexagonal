@@ -21,16 +21,18 @@ public class Pet {
         this.type = type;
         this.happinessLevel = 3;
         this.foodLevel = 3;
+        this.state = PetState.AWAKE;
         this.lastUpdated = LocalDateTime.now();
     }
 
-    public Pet(String id, String name, String type, int happinessLevel, int foodLevel, LocalDateTime lastUpdated) {
+    public Pet(String id, String name, String type, int happinessLevel, int foodLevel, PetState state, LocalDateTime lastUpdated) {
 
         this.id = id;
         this.name = name;
         this.type = type;
         this.happinessLevel = happinessLevel;
         this.foodLevel = foodLevel;
+        this.state = state;
         this.lastUpdated = lastUpdated;
         updateStats();
     }
@@ -46,6 +48,9 @@ public class Pet {
     @Min(0) @Max(5)
     @Setter
     private int foodLevel;
+
+    @Setter
+    private PetState state;
 
     @Setter
     private LocalDateTime lastUpdated;
@@ -78,6 +83,7 @@ public class Pet {
         if (minutesPassed >= 10) {
             this.happinessLevel = Math.max(0, this.happinessLevel - 1);
             this.foodLevel = Math.max(0, this.foodLevel - 1);
+            this.state = PetState.SLEEPING;
             updateTimestamp();
             log.info("⏳ Pet '{}' stats auto-updated. New happinessLevel: {}, foodLevel: {}", name, happinessLevel, foodLevel);
         }
