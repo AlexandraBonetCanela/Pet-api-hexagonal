@@ -1,4 +1,4 @@
-package edu.alexandra.pet.PetModule.application.rest;
+package edu.alexandra.pet.PetModule.application;
 
 import edu.alexandra.pet.PetModule.application.request.CreatePetRequest;
 import edu.alexandra.pet.PetModule.application.request.UpdatePetRequest;

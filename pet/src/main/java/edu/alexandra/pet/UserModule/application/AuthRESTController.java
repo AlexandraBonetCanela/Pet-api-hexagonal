@@ -1,4 +1,4 @@
-package edu.alexandra.pet.UserModule.application.rest;
+package edu.alexandra.pet.UserModule.application;
 
 import edu.alexandra.pet.UserModule.application.request.LoginRequest;
 import edu.alexandra.pet.UserModule.application.request.RegisterRequest;
