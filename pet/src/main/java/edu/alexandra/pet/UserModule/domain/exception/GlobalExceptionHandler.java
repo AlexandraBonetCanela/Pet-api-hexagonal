@@ -1,4 +1,4 @@
-package edu.alexandra.pet.PetModule.domain.exception;
+package edu.alexandra.pet.UserModule.domain.exception;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.websocket.AuthenticationException;
@@ -35,5 +35,4 @@ public class GlobalExceptionHandler {
     private ResponseEntity<Map<String, String>> createErrorResponse(HttpStatus status, String message) {
         return ResponseEntity.status(status).body(Map.of("error", message));
     }
-
 }
