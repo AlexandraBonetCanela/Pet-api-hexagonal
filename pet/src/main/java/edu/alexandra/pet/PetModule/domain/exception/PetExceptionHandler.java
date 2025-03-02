@@ -11,8 +11,8 @@ import java.nio.file.AccessDeniedException;
 import java.util.Map;
 
 @Slf4j
-@RestControllerAdvice
-public class GlobalExceptionHandler {
+@RestControllerAdvice(basePackages = "edu.alexandra.pet.PetModule")
+public class PetExceptionHandler {
 
     @ExceptionHandler(DatabaseException.class)
     public ResponseEntity<Map<String, String>> handleDatabaseException(DatabaseException ex) {
