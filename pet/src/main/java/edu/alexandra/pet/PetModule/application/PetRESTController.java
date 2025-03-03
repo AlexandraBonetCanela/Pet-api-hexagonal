@@ -25,7 +25,7 @@ public class PetRESTController {
 
     @PreAuthorize("hasAnyRole('USER','ADMIN')")
     @PostMapping
-    public ResponseEntity<Pet> createPet(@RequestBody  CreatePetRequest createPetRequest) {
+    public ResponseEntity<Pet> createPet(@RequestBody CreatePetRequest createPetRequest) {
 
         log.info("Creating pet with name: {} for user {}", createPetRequest.getName(), createPetRequest.getUserId());
 
@@ -46,6 +46,17 @@ public class PetRESTController {
         log.info("Getting pets for user with id: {}", userId);
 
         List<Pet> pets = petService.getPets(userId);
+
+        return ResponseEntity.ok().body(pets);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping
+    public ResponseEntity<List<Pet>> getAllPets() {
+
+        log.info("Getting all pets");
+
+        List<Pet> pets = petService.getAllPets();
 
         return ResponseEntity.ok().body(pets);
     }

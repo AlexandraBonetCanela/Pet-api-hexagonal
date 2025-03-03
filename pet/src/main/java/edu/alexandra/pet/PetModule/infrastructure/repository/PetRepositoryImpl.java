@@ -53,4 +53,12 @@ public class PetRepositoryImpl implements PetRepositoryPort {
                 .orElseThrow(() -> new DatabaseException("Pet not found"));
         return PetMapper.toDomain(petMySQLRepository.save(PetMapper.toEntity(pet, entity.getUserId())));
     }
+
+    @Override
+    public List<Pet> getAllPets() {
+        return petMySQLRepository.findAll()
+                .stream()
+                .map(PetMapper::toDomain)
+                .toList();
+    }
 }

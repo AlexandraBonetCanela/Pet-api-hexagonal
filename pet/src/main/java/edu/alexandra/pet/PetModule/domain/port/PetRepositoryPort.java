@@ -15,4 +15,6 @@ public interface PetRepositoryPort {
     Pet createPet(Pet pet, String userId);
 
     Pet updatePet(Pet pet);
+
+    List<Pet> getAllPets();
 }
