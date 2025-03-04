@@ -14,7 +14,7 @@ import java.util.UUID;
 @EqualsAndHashCode
 public class Pet {
 
-    public Pet(String name, String type) {
+    public Pet(String name, PetType type) {
 
         this.id = UUID.randomUUID().toString();
         this.name = name;
@@ -25,7 +25,7 @@ public class Pet {
         this.lastUpdated = LocalDateTime.now();
     }
 
-    public Pet(String id, String name, String type, int happinessLevel, int foodLevel, PetState state, LocalDateTime lastUpdated) {
+    public Pet(String id, String name, PetType type, int happinessLevel, int foodLevel, PetState state, LocalDateTime lastUpdated) {
 
         this.id = id;
         this.name = name;
@@ -39,7 +39,7 @@ public class Pet {
 
     private final String id;
     private final String name;
-    private final String type;
+    private final PetType type;
 
     @Min(0) @Max(5)
     @Setter

@@ -3,6 +3,7 @@ package edu.alexandra.pet.PetModule.domain.service;
 import edu.alexandra.pet.PetModule.application.request.CreatePetRequest;
 import edu.alexandra.pet.PetModule.application.request.UpdatePetRequest;
 import edu.alexandra.pet.PetModule.domain.model.Pet;
+import edu.alexandra.pet.PetModule.domain.model.PetType;
 import edu.alexandra.pet.PetModule.domain.port.PetRepositoryPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class PetServiceImpl implements PetService {
     @Override
     public Pet createPet(CreatePetRequest createPetRequest) {
 
-        Pet pet = new Pet(createPetRequest.getName(), createPetRequest.getType());
+        Pet pet = new Pet(createPetRequest.getName(), PetType.valueOf(createPetRequest.getType()));
         petRepository.createPet(pet, createPetRequest.getUserId());
 
         return pet;
