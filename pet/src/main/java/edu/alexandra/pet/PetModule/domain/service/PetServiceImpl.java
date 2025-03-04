@@ -20,7 +20,7 @@ public class PetServiceImpl implements PetService {
     @Override
     public Pet createPet(CreatePetRequest createPetRequest) {
 
-        Pet pet = new Pet(createPetRequest.getName(), PetType.valueOf(createPetRequest.getType()));
+        Pet pet = new Pet(createPetRequest.getName(), createPetRequest.getType());
         petRepository.createPet(pet, createPetRequest.getUserId());
 
         return pet;
