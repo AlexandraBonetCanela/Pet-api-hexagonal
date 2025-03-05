@@ -17,4 +17,6 @@ public interface PetService {
     Pet updatePet(String petId, UpdatePetRequest updatePetRequest);
 
     List<Pet> getAllPets();
+
+    Pet updatePetBackground(String petId, String newPetBackground);
 }

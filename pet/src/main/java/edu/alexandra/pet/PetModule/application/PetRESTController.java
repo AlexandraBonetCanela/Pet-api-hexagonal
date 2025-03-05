@@ -1,6 +1,7 @@
 package edu.alexandra.pet.PetModule.application;
 
 import edu.alexandra.pet.PetModule.application.request.CreatePetRequest;
+import edu.alexandra.pet.PetModule.application.request.UpdatePetBackgroundRequest;
 import edu.alexandra.pet.PetModule.application.request.UpdatePetRequest;
 import edu.alexandra.pet.PetModule.domain.model.Pet;
 import edu.alexandra.pet.PetModule.domain.service.PetService;
@@ -82,4 +83,16 @@ public class PetRESTController {
 
         return ResponseEntity.noContent().build();
     }
+
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
+    @PutMapping("/{petId}/background")
+    public ResponseEntity<Pet> updatePetBackground(@PathVariable String petId, @RequestBody UpdatePetBackgroundRequest request) {
+
+        log.info("Updating background image for pet with id: {}", petId);
+
+        Pet pet = petService.updatePetBackground(petId, request.getNewPetBackground());
+
+        return ResponseEntity.ok().body(pet);
+    }
+
 }

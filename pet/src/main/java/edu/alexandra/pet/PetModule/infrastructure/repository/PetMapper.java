@@ -18,6 +18,7 @@ public class PetMapper {
                 pet.getHappinessLevel(),
                 pet.getFoodLevel(),
                 pet.getState().toString(),
+                pet.getBackgroundImage(),
                 pet.getLastUpdated(),
                 userId
         );
@@ -32,6 +33,7 @@ public class PetMapper {
                 entity.getHappinessLevel(),
                 entity.getFoodLevel(),
                 PetState.valueOf(entity.getState()),
+                entity.getBackgroundImage(),
                 entity.getLastUpdated()
         );
     }

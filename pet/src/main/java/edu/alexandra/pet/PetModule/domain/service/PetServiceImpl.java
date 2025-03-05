@@ -3,7 +3,6 @@ package edu.alexandra.pet.PetModule.domain.service;
 import edu.alexandra.pet.PetModule.application.request.CreatePetRequest;
 import edu.alexandra.pet.PetModule.application.request.UpdatePetRequest;
 import edu.alexandra.pet.PetModule.domain.model.Pet;
-import edu.alexandra.pet.PetModule.domain.model.PetType;
 import edu.alexandra.pet.PetModule.domain.port.PetRepositoryPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,5 +59,19 @@ public class PetServiceImpl implements PetService {
     public List<Pet> getAllPets() {
 
         return petRepository.getAllPets();
+    }
+
+    @Override
+    public Pet updatePetBackground(String petId, String newPetBackground) {
+
+        Pet pet = petRepository.getPet(petId);
+
+        if (newPetBackground == null || newPetBackground.isEmpty()) {
+            throw new IllegalArgumentException("Background image cannot be null or empty");
+        }
+
+        pet.setBackgroundImage(newPetBackground);
+
+        return petRepository.updatePet(pet);
     }
 }

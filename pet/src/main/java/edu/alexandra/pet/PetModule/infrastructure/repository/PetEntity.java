@@ -25,16 +25,19 @@ public class PetEntity {
     @Column(name = "type", nullable = false)
     private String type;
 
-    @Column(name = "happinessLevel", nullable = false)
+    @Column(name = "happiness_level", nullable = false)
     private int happinessLevel;
 
-    @Column(name = "foodLevel", nullable = false)
+    @Column(name = "food_level", nullable = false)
     private int foodLevel;
 
     @Column(name = "state", nullable = false)
     private String state;
 
-    @Column(name = "lastUpdated", nullable = false)
+    @Column(name = "background_image", nullable = false)
+    private String backgroundImage;
+
+    @Column(name = "last_updated", nullable = false)
     private LocalDateTime lastUpdated;
 
     @Column(name = "user_id", nullable = false)

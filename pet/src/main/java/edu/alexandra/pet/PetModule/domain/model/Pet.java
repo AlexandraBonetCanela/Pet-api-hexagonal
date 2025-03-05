@@ -22,10 +22,11 @@ public class Pet {
         this.happinessLevel = 3;
         this.foodLevel = 3;
         this.state = PetState.AWAKE;
+        this.backgroundImage = "PLAIN";
         this.lastUpdated = LocalDateTime.now();
     }
 
-    public Pet(String id, String name, PetType type, int happinessLevel, int foodLevel, PetState state, LocalDateTime lastUpdated) {
+    public Pet(String id, String name, PetType type, int happinessLevel, int foodLevel, PetState state, String backgroundImage, LocalDateTime lastUpdated) {
 
         this.id = id;
         this.name = name;
@@ -33,6 +34,7 @@ public class Pet {
         this.happinessLevel = happinessLevel;
         this.foodLevel = foodLevel;
         this.state = state;
+        this.backgroundImage = backgroundImage;
         this.lastUpdated = lastUpdated;
         updateStats();
     }
@@ -51,6 +53,9 @@ public class Pet {
 
     @Setter
     private PetState state;
+
+    @Setter
+    private String backgroundImage;
 
     @Setter
     private LocalDateTime lastUpdated;
