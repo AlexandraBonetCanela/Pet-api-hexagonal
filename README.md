@@ -3,7 +3,7 @@
 ## 🎯 Overview  
 Welcome to the **Pet API**, a modern **Spring Boot-based** REST API for managing virtual pets. This API follows a **Hexagonal Architecture** approach, ensuring a modular and maintainable design by separating the **domain logic**, **infrastructure**, and **application layers**.  
 
-There is also an MVC version of this project that you can find [here](https://github.com/AlexandraBonetCanela/Pet-api-mvc)
+There is also an **MVC version** of this project that you can find [here](https://github.com/AlexandraBonetCanela/Pet-api-mvc)
 
 ## 🚀 Key Features  
 ✅ **Hexagonal Architecture** – Decoupled design for scalability and testability.  
