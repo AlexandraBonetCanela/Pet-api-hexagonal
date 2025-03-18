@@ -4,8 +4,8 @@ import edu.alexandra.pet.UserModule.domain.model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -14,16 +14,17 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.function.Function;
 
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Service
 public class JwtService {
 
-    private static final String SECRET_KEY="586E3272357538782F413F4428472B4B6250655368566B597033733676397924";
+    private final Key jwtSigningKey;
 
     public String getToken(UserDetails user) {
         User user2 = (User) user;
         HashMap<String, Object> claims = new HashMap<>();
-        claims.put("userId", user2.getId()); // ✅ Include userId
-        claims.put("role", user2.getRole()); // ✅ Include role
+        claims.put("userId", user2.getId());
+        claims.put("role", user2.getRole());
 
         return getToken(claims, user);
     }
@@ -34,13 +35,8 @@ public class JwtService {
                 .setSubject(user.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
-                .signWith(getKey(), SignatureAlgorithm.HS256)
+                .signWith(jwtSigningKey, SignatureAlgorithm.HS256)
                 .compact();
-    }
-
-    private Key getKey()    {
-        byte[] keyBytes= Decoders.BASE64.decode(SECRET_KEY);
-        return Keys.hmacShaKeyFor(keyBytes);
     }
 
     public String getUsernameFromToken(String token) {
@@ -56,7 +52,7 @@ public class JwtService {
     {
         return Jwts
                 .parserBuilder()
-                .setSigningKey(getKey())
+                .setSigningKey(jwtSigningKey)
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
